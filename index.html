@@ -3,113 +3,921 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ChitKit — Интерактивная детская читалка</title>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
-    
+    <title>ChitKit — Интерактивная детская читалка | Приложение для чтения</title>
+    <meta name="description" content="ChitKit — интерактивная платформа для детского чтения. Увлекательные истории, которые оживают. Прививаем любовь к книгам через игру и технологии.">
+    <meta name="keywords" content="ChitKit, детская читалка, интерактивное чтение, приложение для детей, детские книги, обучение чтению, читалка для детей">
+    <meta name="author" content="ChitKit">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://chitkit.ru/">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="ChitKit — Интерактивная детская читалка">
+    <meta property="og:description" content="Увлекательные истории, которые оживают. Прививаем детям любовь к книгам через игру и технологии.">
+    <meta property="og:url" content="https://chitkit.ru/">
+    <meta property="og:site_name" content="ChitKit">
+    <meta property="og:locale" content="ru_RU">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ChitKit — Интерактивная детская читалка">
+    <meta name="twitter:description" content="Увлекательные истории, которые оживают. Прививаем детям любовь к книгам через игру и технологии.">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "ChitKit",
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "iOS, Android",
+        "description": "Интерактивная платформа для детского чтения. Увлекательные истории, которые оживают.",
+        "url": "https://chitkit.ru/",
+        "author": {
+            "@type": "Organization",
+            "name": "ChitKit"
+        },
+        "audience": {
+            "@type": "EducationalAudience",
+            "educationalRole": "student",
+            "suggestedMinAge": 4,
+            "suggestedMaxAge": 12
+        }
+    }
+    </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&display=swap" rel="stylesheet">
+
     <style>
-        /* Базовые настройки страницы */
+        *, *::before, *::after { box-sizing: border-box; }
+
+        :root {
+            --orange: #ff9f43;
+            --orange-dark: #e8912e;
+            --mint: #1dd1a1;
+            --mint-dark: #10ac84;
+            --cream: #fdfbf7;
+            --text: #333;
+            --text-light: #555;
+            --text-muted: #999;
+            --white: #fff;
+            --shadow: 0 4px 16px rgba(0,0,0,0.08);
+            --shadow-lg: 0 10px 30px rgba(0,0,0,0.1);
+            --radius: 16px;
+            --radius-lg: 24px;
+        }
+
+        html { scroll-behavior: smooth; }
+
         body {
             margin: 0;
             font-family: 'Nunito', sans-serif;
-            background-color: #fdfbf7; /* Мягкий кремовый фон */
-            color: #333;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        /* Шапка сайта */
-        header {
-            background-color: #ff9f43; /* Яркий оранжевый */
-            color: white;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 2.5rem;
-            font-weight: 900;
-            letter-spacing: 2px;
-        }
-
-        /* Основная часть */
-        main {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 40px 20px;
-        }
-
-        /* Карточка с контентом */
-        .hero-card {
-            background: white;
-            padding: 40px;
-            border-radius: 24px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-            max-width: 600px;
-            border: 3px dashed #1dd1a1; /* Мятная пунктирная рамка для игривости */
-        }
-
-        h2 {
-            color: #ff9f43;
-            font-size: 2rem;
-            margin-top: 0;
-        }
-
-        p {
-            font-size: 1.2rem;
+            background-color: var(--cream);
+            color: var(--text);
             line-height: 1.6;
-            color: #555;
         }
 
-        /* Кнопка-заглушка */
+        /* ===== НАВИГАЦИЯ ===== */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--white);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            padding: 0 20px;
+        }
+
+        .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--orange);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--orange); }
+
+        .burger {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .burger span {
+            display: block;
+            width: 24px;
+            height: 3px;
+            background: var(--text);
+            margin: 5px 0;
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            background: linear-gradient(135deg, var(--orange) 0%, #ffbe76 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 100px 20px 80px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            margin: 0 0 16px;
+            letter-spacing: 1px;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 600px;
+            margin: 0 auto 32px;
+            opacity: 0.95;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* ===== КНОПКИ ===== */
         .btn {
             display: inline-block;
-            margin-top: 20px;
-            padding: 15px 30px;
-            background-color: #1dd1a1; /* Мятный цвет кнопки */
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
+            padding: 14px 32px;
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 1.05rem;
             border-radius: 50px;
-            font-size: 1.2rem;
-            transition: transform 0.2s, background-color 0.2s;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
         .btn:hover {
-            background-color: #10ac84;
-            transform: scale(1.05);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
         }
 
-        /* Подвал */
-        footer {
+        .btn-primary {
+            background: var(--white);
+            color: var(--orange);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .btn-mint {
+            background: var(--mint);
+            color: var(--white);
+        }
+
+        .btn-mint:hover { background: var(--mint-dark); }
+
+        /* ===== СЕКЦИИ ===== */
+        .section {
+            padding: 80px 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-alt {
+            background: var(--white);
+        }
+
+        .section-alt .section {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .section-title {
             text-align: center;
-            padding: 20px;
-            background-color: #fff;
-            color: #aaa;
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--text);
+            margin: 0 0 12px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.15rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto 48px;
+        }
+
+        /* ===== О ПРОЕКТЕ ===== */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-size: 1.4rem;
+            color: var(--orange);
+            margin: 0 0 12px;
+        }
+
+        .about-text p {
+            color: var(--text-light);
+            font-size: 1.05rem;
+        }
+
+        .about-visual {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border-radius: var(--radius-lg);
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+        }
+
+        /* ===== ВОЗМОЖНОСТИ ===== */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .feature-card {
+            background: var(--white);
+            padding: 32px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .feature-card:hover { transform: translateY(-4px); }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 16px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.2rem;
+            margin: 0 0 8px;
+            color: var(--text);
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            margin: 0;
+        }
+
+        /* ===== КАК ЭТО РАБОТАЕТ ===== */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            counter-reset: step;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step::before {
+            counter-increment: step;
+            content: counter(step);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 56px;
+            height: 56px;
+            background: var(--orange);
+            color: var(--white);
+            font-weight: 900;
+            font-size: 1.4rem;
+            border-radius: 50%;
+            margin: 0 auto 16px;
+        }
+
+        .step h3 {
+            font-size: 1.05rem;
+            margin: 0 0 8px;
+        }
+
+        .step p {
             font-size: 0.9rem;
+            color: var(--text-light);
+            margin: 0;
+        }
+
+        /* ===== СТАТИСТИКА ===== */
+        .stats-bar {
+            background: linear-gradient(135deg, var(--mint) 0%, #55efc4 100%);
+            padding: 48px 20px;
+        }
+
+        .stats-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .stat-number {
+            font-size: 2.4rem;
+            font-weight: 900;
+        }
+
+        .stat-label {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        /* ===== ОТЗЫВЫ ===== */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .testimonial {
+            background: var(--cream);
+            padding: 28px;
+            border-radius: var(--radius);
+            border-left: 4px solid var(--orange);
+        }
+
+        .testimonial p {
+            font-size: 1rem;
+            font-style: italic;
+            color: var(--text-light);
+            margin: 0 0 12px;
+        }
+
+        .testimonial-author {
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--text);
+        }
+
+        /* ===== FAQ ===== */
+        .faq-list {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #eee;
+            padding: 20px 0;
+        }
+
+        .faq-question {
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: none;
+            border: none;
+            width: 100%;
+            text-align: left;
+            font-family: inherit;
+            color: var(--text);
+            padding: 0;
+        }
+
+        .faq-question::after {
+            content: '+';
+            font-size: 1.4rem;
+            color: var(--orange);
+            flex-shrink: 0;
+            margin-left: 16px;
+            transition: transform 0.2s;
+        }
+
+        .faq-item.open .faq-question::after {
+            content: '−';
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            color: var(--text-light);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 300px;
+            padding-top: 12px;
+        }
+
+        /* ===== CTA ===== */
+        .cta {
+            text-align: center;
+            background: linear-gradient(135deg, var(--orange) 0%, #ffbe76 100%);
+            color: var(--white);
+            padding: 80px 20px;
+        }
+
+        .cta h2 {
+            font-size: 2rem;
+            margin: 0 0 12px;
+        }
+
+        .cta p {
+            font-size: 1.15rem;
+            opacity: 0.95;
+            max-width: 500px;
+            margin: 0 auto 32px;
+        }
+
+        /* ===== КОНТАКТЫ ===== */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+        }
+
+        .contact-info h3 {
+            color: var(--orange);
+            font-size: 1.3rem;
+            margin: 0 0 16px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 16px;
+            font-size: 1rem;
+            color: var(--text-light);
+        }
+
+        .contact-item span:first-child {
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            padding: 14px 18px;
+            border: 2px solid #eee;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 1rem;
+            resize: vertical;
+            transition: border-color 0.2s;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--orange);
+        }
+
+        /* ===== ФУТЕР ===== */
+        footer {
+            background: var(--text);
+            color: #ccc;
+            padding: 48px 20px 24px;
+        }
+
+        .footer-grid {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 32px;
+            margin-bottom: 32px;
+        }
+
+        .footer-brand {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--orange);
+            margin-bottom: 8px;
+        }
+
+        .footer-desc {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #aaa;
+        }
+
+        footer h4 {
+            color: var(--white);
+            font-size: 1rem;
+            margin: 0 0 12px;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li { margin-bottom: 8px; }
+
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover { color: var(--orange); }
+
+        .footer-bottom {
+            max-width: 1100px;
+            margin: 0 auto;
+            border-top: 1px solid #444;
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-size: 0.85rem;
+            color: #888;
+        }
+
+        .footer-legal a {
+            color: #888;
+            text-decoration: none;
+            margin-left: 16px;
+        }
+
+        .footer-legal a:hover { color: var(--orange); }
+
+        /* ===== АДАПТИВНАЯ ВЕРСТКА ===== */
+        @media (max-width: 900px) {
+            .features-grid,
+            .testimonials-grid { grid-template-columns: 1fr 1fr; }
+
+            .steps { grid-template-columns: 1fr 1fr; }
+
+            .stats-inner { grid-template-columns: 1fr 1fr; }
+
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 640px) {
+            .nav-links { display: none; }
+            .burger { display: block; }
+
+            .nav-links.open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 64px;
+                left: 0;
+                right: 0;
+                background: var(--white);
+                padding: 20px;
+                box-shadow: var(--shadow);
+                gap: 16px;
+            }
+
+            .hero h1 { font-size: 2rem; }
+            .hero p { font-size: 1.1rem; }
+
+            .about-grid,
+            .contact-grid { grid-template-columns: 1fr; }
+
+            .features-grid,
+            .testimonials-grid,
+            .steps { grid-template-columns: 1fr; }
+
+            .stats-inner { grid-template-columns: 1fr 1fr; gap: 20px; }
+
+            .footer-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>ChitKit</h1>
-    </header>
-    
-    <main>
-        <div class="hero-card">
-            <h2>Книги, которые оживают!</h2>
-            <p>Привет! Это будущая страница <strong>ChitKit</strong> — интерактивной платформы, созданной для того, чтобы привить детям любовь к чтению.</p>
-            <p>Мы разрабатываем увлекательное приложение, где каждая история становится настоящим приключением.</p>
-            <a href="#" class="btn">Скоро запуск!</a>
-        </div>
-    </main>
 
+    <!-- Навигация -->
+    <nav>
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">ChitKit</a>
+            <button class="burger" aria-label="Меню" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="#about">О проекте</a></li>
+                <li><a href="#features">Возможности</a></li>
+                <li><a href="#how">Как это работает</a></li>
+                <li><a href="#reviews">Отзывы</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#contact">Контакты</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <h1>Книги, которые оживают!</h1>
+        <p>Интерактивная платформа для детского чтения. Превращаем каждую историю в увлекательное приключение для вашего ребёнка.</p>
+        <div class="hero-buttons">
+            <a href="#features" class="btn btn-primary">Узнать больше</a>
+            <a href="#contact" class="btn btn-outline">Связаться с нами</a>
+        </div>
+    </section>
+
+    <!-- О проекте -->
+    <div class="section-alt">
+        <section id="about" class="section">
+            <h2 class="section-title">О проекте</h2>
+            <p class="section-subtitle">ChitKit — это больше, чем читалка. Это целый мир, где чтение становится увлекательным.</p>
+            <div class="about-grid">
+                <div class="about-text">
+                    <h3>Наша миссия</h3>
+                    <p>Мы создаём пространство, где каждый ребёнок от 4 до 12 лет полюбит читать. Наши интерактивные истории развивают воображение, словарный запас и критическое мышление.</p>
+                    <h3>Почему ChitKit?</h3>
+                    <p>Мы объединяем классическую литературу и современные технологии: озвучка, анимации, мини-игры и система поощрений делают чтение по-настоящему захватывающим.</p>
+                </div>
+                <div class="about-visual">📚</div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Возможности -->
+    <section id="features" class="section">
+        <h2 class="section-title">Возможности</h2>
+        <p class="section-subtitle">Всё, что нужно для увлекательного детского чтения — в одном приложении.</p>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🎨</div>
+                <h3>Интерактивные иллюстрации</h3>
+                <p>Красочные картинки, которые оживают по касанию и вовлекают ребёнка в сюжет.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔊</div>
+                <h3>Профессиональная озвучка</h3>
+                <p>Каждая книга озвучена профессиональными актёрами с живыми эмоциями.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🏆</div>
+                <h3>Система достижений</h3>
+                <p>Награды, значки и уровни мотивируют читать больше каждый день.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">👨‍👩‍👧</div>
+                <h3>Родительский контроль</h3>
+                <p>Статистика чтения, таймеры и управление контентом для родителей.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📖</div>
+                <h3>Библиотека 500+ книг</h3>
+                <p>Растущая коллекция сказок, рассказов и образовательных историй.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌙</div>
+                <h3>Режим чтения на ночь</h3>
+                <p>Мягкие тона, тихая озвучка и таймер засыпания для вечернего чтения.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Статистика -->
+    <div class="stats-bar">
+        <div class="stats-inner">
+            <div>
+                <div class="stat-number">500+</div>
+                <div class="stat-label">Книг в библиотеке</div>
+            </div>
+            <div>
+                <div class="stat-number">50 000+</div>
+                <div class="stat-label">Активных пользователей</div>
+            </div>
+            <div>
+                <div class="stat-number">4.8 ★</div>
+                <div class="stat-label">Средняя оценка</div>
+            </div>
+            <div>
+                <div class="stat-number">12 мин</div>
+                <div class="stat-label">Среднее время чтения</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Как это работает -->
+    <section id="how" class="section">
+        <h2 class="section-title">Как это работает</h2>
+        <p class="section-subtitle">Начать пользоваться ChitKit очень просто — всего 4 шага.</p>
+        <div class="steps">
+            <div class="step">
+                <h3>Скачайте приложение</h3>
+                <p>Доступно в App Store и Google Play. Установка занимает меньше минуты.</p>
+            </div>
+            <div class="step">
+                <h3>Создайте профиль</h3>
+                <p>Укажите возраст ребёнка — мы подберём подходящие книги.</p>
+            </div>
+            <div class="step">
+                <h3>Выберите книгу</h3>
+                <p>Откройте библиотеку и выберите историю по интересам.</p>
+            </div>
+            <div class="step">
+                <h3>Читайте и играйте</h3>
+                <p>Погружайтесь в интерактивные истории и собирайте награды!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Отзывы -->
+    <div class="section-alt">
+        <section id="reviews" class="section">
+            <h2 class="section-title">Отзывы</h2>
+            <p class="section-subtitle">Что говорят родители о ChitKit.</p>
+            <div class="testimonials-grid">
+                <div class="testimonial">
+                    <p>«Дочка раньше не любила читать, а теперь сама просит открыть ChitKit перед сном. Потрясающее приложение!»</p>
+                    <div class="testimonial-author">Мария К., мама Алисы (6 лет)</div>
+                </div>
+                <div class="testimonial">
+                    <p>«Очень нравится родительский контроль — я точно знаю, сколько и что читает мой сын. Рекомендую!»</p>
+                    <div class="testimonial-author">Дмитрий П., папа Артёма (8 лет)</div>
+                </div>
+                <div class="testimonial">
+                    <p>«Озвучка книг просто невероятная, ребёнок слушает с открытым ртом. Наконец нашли замену мультикам.»</p>
+                    <div class="testimonial-author">Елена С., мама Максима (5 лет)</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- FAQ -->
+    <section id="faq" class="section">
+        <h2 class="section-title">Частые вопросы</h2>
+        <p class="section-subtitle">Ответы на популярные вопросы о ChitKit.</p>
+        <div class="faq-list">
+            <div class="faq-item">
+                <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                    Для какого возраста подходит ChitKit?
+                </button>
+                <div class="faq-answer">ChitKit создан для детей от 4 до 12 лет. Контент адаптируется под возраст ребёнка: для малышей — простые сказки с большими картинками, для школьников — более сложные истории с интерактивными элементами.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                    Приложение бесплатное?
+                </button>
+                <div class="faq-answer">Базовый набор из 50 книг доступен бесплатно. Подписка открывает полный доступ к библиотеке из 500+ книг, а также убирает рекламу и открывает дополнительные функции.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                    Можно ли пользоваться без интернета?
+                </button>
+                <div class="faq-answer">Да! Вы можете скачать книги для чтения офлайн. Это удобно в поездках или когда нет стабильного подключения к интернету.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                    Как обеспечивается безопасность ребёнка?
+                </button>
+                <div class="faq-answer">Весь контент проходит модерацию детских психологов. В приложении нет рекламы третьих лиц, встроенных покупок без подтверждения родителя и доступа к внешним ссылкам. Мы соблюдаем требования закона о персональных данных.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                    На каких устройствах работает ChitKit?
+                </button>
+                <div class="faq-answer">ChitKit доступен на iOS (iPhone, iPad) и Android (телефоны и планшеты). Мы также работаем над веб-версией для использования на компьютерах.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="cta">
+        <h2>Готовы начать читать?</h2>
+        <p>Скачайте ChitKit и откройте для ребёнка мир увлекательных историй уже сегодня.</p>
+        <a href="#contact" class="btn btn-primary">Попробовать бесплатно</a>
+    </div>
+
+    <!-- Контакты -->
+    <div class="section-alt">
+        <section id="contact" class="section">
+            <h2 class="section-title">Контакты</h2>
+            <p class="section-subtitle">Свяжитесь с нами — мы всегда рады помочь.</p>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Как с нами связаться</h3>
+                    <div class="contact-item">
+                        <span>📧</span>
+                        <span>hello@chitkit.ru</span>
+                    </div>
+                    <div class="contact-item">
+                        <span>📍</span>
+                        <span>Москва, Россия</span>
+                    </div>
+                    <div class="contact-item">
+                        <span>💬</span>
+                        <span>Телеграм: @chitkit_support</span>
+                    </div>
+                    <h3 style="margin-top: 24px;">Для бизнеса</h3>
+                    <div class="contact-item">
+                        <span>🤝</span>
+                        <span>Партнёрство: partners@chitkit.ru</span>
+                    </div>
+                    <div class="contact-item">
+                        <span>📰</span>
+                        <span>Пресса: press@chitkit.ru</span>
+                    </div>
+                </div>
+                <form class="contact-form" onsubmit="return false;">
+                    <input type="text" placeholder="Ваше имя" required>
+                    <input type="email" placeholder="Email" required>
+                    <textarea rows="4" placeholder="Сообщение" required></textarea>
+                    <button type="submit" class="btn btn-mint">Отправить</button>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <!-- Футер -->
     <footer>
-        <p>&copy; 2026 ChitKit. Все права защищены.</p>
+        <div class="footer-grid">
+            <div>
+                <div class="footer-brand">ChitKit</div>
+                <p class="footer-desc">Интерактивная платформа для детского чтения. Превращаем книги в приключения с 2025 года.</p>
+            </div>
+            <div>
+                <h4>Навигация</h4>
+                <ul class="footer-links">
+                    <li><a href="#about">О проекте</a></li>
+                    <li><a href="#features">Возможности</a></li>
+                    <li><a href="#how">Как это работает</a></li>
+                    <li><a href="#reviews">Отзывы</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Поддержка</h4>
+                <ul class="footer-links">
+                    <li><a href="#contact">Контакты</a></li>
+                    <li><a href="#faq">Помощь</a></li>
+                    <li><a href="mailto:hello@chitkit.ru">Email</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Документы</h4>
+                <ul class="footer-links">
+                    <li><a href="privacy.html">Политика конфиденциальности</a></li>
+                    <li><a href="terms.html">Пользовательское соглашение</a></li>
+                    <li><a href="cookies.html">Политика cookies</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2025–2026 ChitKit. Все права защищены.</span>
+            <div class="footer-legal">
+                <a href="privacy.html">Конфиденциальность</a>
+                <a href="terms.html">Условия</a>
+            </div>
+        </div>
     </footer>
+
 </body>
 </html>
