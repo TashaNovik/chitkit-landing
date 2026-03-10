@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChitKit Kids — Читай, играй, расти! | Интерактивная платформа для детей</title>
+    <meta name="description" content="ChitKit Kids — продуктовая платформа для детского чтения. Личные кабинеты, доступ к книгам, интерактивный контент. Читай, играй, расти!">
+    <meta name="keywords" content="ChitKit Kids, детская читалка, интерактивные книги, чтение для детей, личный кабинет, библиотека книг, обучение чтению">
+    <meta name="author" content="ChitKit">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://chitkit.kids/">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="ChitKit Kids — Читай, играй, расти!">
+    <meta property="og:description" content="Продуктовая платформа для детского чтения. Личные кабинеты, интерактивные книги и система достижений для детей от 4 до 12 лет.">
+    <meta property="og:url" content="https://chitkit.kids/">
+    <meta property="og:site_name" content="ChitKit Kids">
+    <meta property="og:locale" content="ru_RU">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ChitKit Kids — Читай, играй, расти!">
+    <meta name="twitter:description" content="Продуктовая платформа для детского чтения. Интерактивные книги, личный кабинет и система достижений.">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "ChitKit Kids",
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "Web, iOS, Android",
+        "description": "Продуктовая платформа для детского чтения. Личные кабинеты, доступ к книгам и интерактивный контент.",
+        "url": "https://chitkit.kids/",
+        "author": {
+            "@type": "Organization",
+            "name": "ChitKit",
+            "url": "https://chitkit.ru/"
+        },
+        "audience": {
+            "@type": "EducationalAudience",
+            "educationalRole": "student",
+            "suggestedMinAge": 4,
+            "suggestedMaxAge": 12
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "RUB",
+            "description": "Бесплатный доступ к 50 книгам"
+        }
+    }
+    </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; }
+
+        :root {
+            --purple: #6c5ce7;
+            --purple-dark: #5a4bd1;
+            --purple-light: #a29bfe;
+            --yellow: #ffeaa7;
+            --yellow-accent: #fdcb6e;
+            --pink: #fd79a8;
+            --pink-light: #fab1a0;
+            --mint: #55efc4;
+            --mint-dark: #00cec9;
+            --sky: #74b9ff;
+            --cream: #fef9f3;
+            --text: #2d3436;
+            --text-light: #555;
+            --text-muted: #999;
+            --white: #fff;
+            --shadow: 0 4px 16px rgba(108,92,231,0.1);
+            --shadow-lg: 0 10px 30px rgba(108,92,231,0.15);
+            --radius: 16px;
+            --radius-lg: 24px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            margin: 0;
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--cream);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* ===== НАВИГАЦИЯ ===== */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--white);
+            box-shadow: 0 2px 8px rgba(108,92,231,0.08);
+            padding: 0 20px;
+        }
+
+        .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--purple);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .nav-logo span {
+            color: var(--pink);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--purple); }
+
+        .nav-cta {
+            background: var(--purple);
+            color: var(--white) !important;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 700 !important;
+            transition: background 0.2s, transform 0.2s !important;
+        }
+
+        .nav-cta:hover {
+            background: var(--purple-dark) !important;
+            transform: translateY(-1px);
+        }
+
+        .burger {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .burger span {
+            display: block;
+            width: 24px;
+            height: 3px;
+            background: var(--text);
+            margin: 5px 0;
+            border-radius: 2px;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            background: linear-gradient(135deg, var(--purple) 0%, var(--purple-light) 50%, var(--pink) 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 100px 20px 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '⭐ 📖 🌈 🦋 🎨 ✨ 🌟 📚';
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            font-size: 2rem;
+            opacity: 0.15;
+            letter-spacing: 40px;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 900;
+            margin: 0 0 16px;
+            position: relative;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 600px;
+            margin: 0 auto 36px;
+            opacity: 0.95;
+            position: relative;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            position: relative;
+        }
+
+        /* ===== КНОПКИ ===== */
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 1.05rem;
+            border-radius: 50px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-primary {
+            background: var(--white);
+            color: var(--purple);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .btn-purple {
+            background: var(--purple);
+            color: var(--white);
+        }
+
+        .btn-purple:hover { background: var(--purple-dark); }
+
+        .btn-pink {
+            background: var(--pink);
+            color: var(--white);
+        }
+
+        .btn-pink:hover { background: #e66892; }
+
+        /* ===== СЕКЦИИ ===== */
+        .section {
+            padding: 80px 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-alt {
+            background: var(--white);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--text);
+            margin: 0 0 12px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.15rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto 48px;
+        }
+
+        /* ===== ПЛАТФОРМА В ЦИФРАХ ===== */
+        .platform-highlights {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+        .highlight-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 36px 28px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            border-top: 4px solid var(--purple);
+            transition: transform 0.2s;
+        }
+
+        .highlight-card:nth-child(2) { border-top-color: var(--pink); }
+        .highlight-card:nth-child(3) { border-top-color: var(--mint); }
+
+        .highlight-card:hover { transform: translateY(-4px); }
+
+        .highlight-icon {
+            font-size: 3rem;
+            margin-bottom: 12px;
+        }
+
+        .highlight-card h3 {
+            font-size: 1.2rem;
+            margin: 0 0 8px;
+            color: var(--text);
+        }
+
+        .highlight-card p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            margin: 0;
+        }
+
+        /* ===== ЛИЧНЫЙ КАБИНЕТ ===== */
+        .cabinet-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .cabinet-visual {
+            background: linear-gradient(135deg, var(--purple-light) 0%, var(--sky) 100%);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 340px;
+        }
+
+        .cabinet-mockup {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 24px;
+            width: 100%;
+            max-width: 300px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .mockup-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .mockup-avatar {
+            width: 40px;
+            height: 40px;
+            background: var(--yellow);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .mockup-name {
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .mockup-level {
+            font-size: 0.75rem;
+            color: var(--purple);
+            font-weight: 600;
+        }
+
+        .mockup-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .mockup-stat {
+            background: var(--cream);
+            border-radius: 8px;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .mockup-stat-num {
+            font-weight: 900;
+            font-size: 1.1rem;
+            color: var(--purple);
+        }
+
+        .mockup-stat-label {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+        }
+
+        .mockup-progress {
+            background: #eee;
+            border-radius: 20px;
+            height: 10px;
+            overflow: hidden;
+        }
+
+        .mockup-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--purple), var(--pink));
+            border-radius: 20px;
+            width: 68%;
+        }
+
+        .mockup-progress-label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+            text-align: right;
+        }
+
+        .cabinet-text h3 {
+            font-size: 1.4rem;
+            color: var(--purple);
+            margin: 0 0 12px;
+        }
+
+        .cabinet-text p {
+            color: var(--text-light);
+            font-size: 1.05rem;
+        }
+
+        .cabinet-features {
+            list-style: none;
+            padding: 0;
+            margin: 16px 0 0;
+        }
+
+        .cabinet-features li {
+            padding: 8px 0;
+            font-size: 1rem;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cabinet-features li::before {
+            content: '✓';
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            background: var(--mint);
+            color: var(--white);
+            font-size: 0.8rem;
+            font-weight: 900;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* ===== БИБЛИОТЕКА ===== */
+        .library-preview {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .book-card {
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s;
+            background: var(--white);
+        }
+
+        .book-card:hover { transform: translateY(-6px) rotate(-1deg); }
+
+        .book-cover {
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+        }
+
+        .book-card:nth-child(1) .book-cover { background: linear-gradient(135deg, #ffeaa7, #fdcb6e); }
+        .book-card:nth-child(2) .book-cover { background: linear-gradient(135deg, #a29bfe, #6c5ce7); }
+        .book-card:nth-child(3) .book-cover { background: linear-gradient(135deg, #55efc4, #00cec9); }
+        .book-card:nth-child(4) .book-cover { background: linear-gradient(135deg, #fab1a0, #fd79a8); }
+        .book-card:nth-child(5) .book-cover { background: linear-gradient(135deg, #74b9ff, #0984e3); }
+        .book-card:nth-child(6) .book-cover { background: linear-gradient(135deg, #ff7675, #d63031); }
+        .book-card:nth-child(7) .book-cover { background: linear-gradient(135deg, #dfe6e9, #b2bec3); }
+        .book-card:nth-child(8) .book-cover { background: linear-gradient(135deg, #ffeaa7, #e17055); }
+
+        .book-info {
+            padding: 14px;
+        }
+
+        .book-info h4 {
+            margin: 0 0 4px;
+            font-size: 0.95rem;
+            color: var(--text);
+        }
+
+        .book-info span {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .book-age {
+            display: inline-block;
+            background: var(--purple);
+            color: var(--white);
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 20px;
+            margin-left: 6px;
+        }
+
+        /* ===== ВОЗМОЖНОСТИ ПЛАТФОРМЫ ===== */
+        .features-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+        }
+
+        .feature-row {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            background: var(--white);
+            padding: 28px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            transition: transform 0.2s;
+        }
+
+        .feature-row:hover { transform: translateY(-3px); }
+
+        .feature-row-icon {
+            font-size: 2.2rem;
+            flex-shrink: 0;
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--cream);
+            border-radius: 14px;
+        }
+
+        .feature-row h3 {
+            font-size: 1.1rem;
+            margin: 0 0 6px;
+            color: var(--text);
+        }
+
+        .feature-row p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin: 0;
+        }
+
+        /* ===== ТАРИФЫ ===== */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+            align-items: start;
+        }
+
+        .pricing-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 36px 28px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            position: relative;
+            transition: transform 0.2s;
+        }
+
+        .pricing-card:hover { transform: translateY(-4px); }
+
+        .pricing-card.featured {
+            border: 3px solid var(--purple);
+            transform: scale(1.04);
+        }
+
+        .pricing-card.featured:hover { transform: scale(1.06); }
+
+        .pricing-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--purple);
+            color: var(--white);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 16px;
+            border-radius: 20px;
+        }
+
+        .pricing-card h3 {
+            font-size: 1.3rem;
+            margin: 0 0 8px;
+            color: var(--text);
+        }
+
+        .pricing-price {
+            font-size: 2.4rem;
+            font-weight: 900;
+            color: var(--purple);
+            margin: 16px 0 4px;
+        }
+
+        .pricing-period {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .pricing-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 24px;
+            text-align: left;
+        }
+
+        .pricing-features li {
+            padding: 8px 0;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .pricing-features li:last-child { border-bottom: none; }
+
+        /* ===== БЕЗОПАСНОСТЬ ===== */
+        .safety-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .safety-card {
+            text-align: center;
+            padding: 24px 16px;
+        }
+
+        .safety-icon {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+        }
+
+        .safety-card h3 {
+            font-size: 1rem;
+            margin: 0 0 6px;
+        }
+
+        .safety-card p {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin: 0;
+        }
+
+        /* ===== CTA ===== */
+        .cta {
+            text-align: center;
+            background: linear-gradient(135deg, var(--purple) 0%, var(--pink) 100%);
+            color: var(--white);
+            padding: 80px 20px;
+        }
+
+        .cta h2 {
+            font-size: 2rem;
+            margin: 0 0 12px;
+        }
+
+        .cta p {
+            font-size: 1.15rem;
+            opacity: 0.95;
+            max-width: 500px;
+            margin: 0 auto 32px;
+        }
+
+        /* ===== ПОДДЕРЖКА ===== */
+        .support-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+        }
+
+        .support-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 36px;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .support-card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+
+        .support-card h3 {
+            font-size: 1.2rem;
+            margin: 0 0 8px;
+            color: var(--purple);
+        }
+
+        .support-card p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            margin: 0 0 16px;
+        }
+
+        .support-card a {
+            color: var(--purple);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .support-card a:hover { text-decoration: underline; }
+
+        /* ===== FAQ ===== */
+        .faq-list {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #eee;
+            padding: 20px 0;
+        }
+
+        .faq-question {
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: none;
+            border: none;
+            width: 100%;
+            text-align: left;
+            font-family: inherit;
+            color: var(--text);
+            padding: 0;
+        }
+
+        .faq-question::after {
+            content: '+';
+            font-size: 1.4rem;
+            color: var(--purple);
+            flex-shrink: 0;
+            margin-left: 16px;
+        }
+
+        .faq-item.open .faq-question::after { content: '−'; }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            color: var(--text-light);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 300px;
+            padding-top: 12px;
+        }
+
+        /* ===== ФУТЕР ===== */
+        footer {
+            background: var(--text);
+            color: #ccc;
+            padding: 48px 20px 24px;
+        }
+
+        .footer-grid {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 28px;
+            margin-bottom: 32px;
+        }
+
+        .footer-brand {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--purple-light);
+            margin-bottom: 8px;
+        }
+
+        .footer-desc {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #aaa;
+        }
+
+        footer h4 {
+            color: var(--white);
+            font-size: 1rem;
+            margin: 0 0 12px;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li { margin-bottom: 8px; }
+
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover { color: var(--purple-light); }
+
+        .footer-bottom {
+            max-width: 1100px;
+            margin: 0 auto;
+            border-top: 1px solid #444;
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-size: 0.85rem;
+            color: #888;
+        }
+
+        .footer-legal a {
+            color: #888;
+            text-decoration: none;
+            margin-left: 16px;
+        }
+
+        .footer-legal a:hover { color: var(--purple-light); }
+
+        /* ===== АДАПТИВ ===== */
+        @media (max-width: 900px) {
+            .platform-highlights,
+            .pricing-grid { grid-template-columns: 1fr 1fr; }
+
+            .library-preview { grid-template-columns: repeat(2, 1fr); }
+
+            .library-preview .book-card:nth-child(n+5) { display: none; }
+
+            .features-list { grid-template-columns: 1fr; }
+
+            .safety-grid { grid-template-columns: 1fr 1fr; }
+
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 640px) {
+            .nav-links { display: none; }
+            .burger { display: block; }
+
+            .nav-links.open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 64px;
+                left: 0;
+                right: 0;
+                background: var(--white);
+                padding: 20px;
+                box-shadow: var(--shadow);
+                gap: 16px;
+            }
+
+            .hero h1 { font-size: 2.2rem; }
+            .hero p { font-size: 1.1rem; }
+
+            .platform-highlights,
+            .pricing-grid,
+            .support-grid { grid-template-columns: 1fr; }
+
+            .pricing-card.featured {
+                transform: none;
+                order: -1;
+            }
+
+            .cabinet-grid { grid-template-columns: 1fr; }
+
+            .library-preview { grid-template-columns: 1fr 1fr; }
+
+            .safety-grid { grid-template-columns: 1fr 1fr; }
+
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Навигация -->
+    <nav>
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">ChitKit<span>.kids</span></a>
+            <button class="burger" aria-label="Меню" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="#library">Библиотека</a></li>
+                <li><a href="#cabinet">Кабинет</a></li>
+                <li><a href="#features">Возможности</a></li>
+                <li><a href="#pricing">Тарифы</a></li>
+                <li><a href="#support">Помощь</a></li>
+                <li><a href="#" class="nav-cta">Войти</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <h1>Читай, играй, расти! 🚀</h1>
+        <p>Твоя личная библиотека интерактивных книг. Открывай истории, собирай награды и становись настоящим читателем!</p>
+        <div class="hero-buttons">
+            <a href="#pricing" class="btn btn-primary">Начать читать</a>
+            <a href="#library" class="btn btn-outline">Посмотреть книги</a>
+        </div>
+    </section>
+
+    <!-- Платформа в цифрах -->
+    <section class="section">
+        <h2 class="section-title">Платформа для юных читателей</h2>
+        <p class="section-subtitle">Всё продумано, чтобы ребёнок сам хотел открывать книги каждый день.</p>
+        <div class="platform-highlights">
+            <div class="highlight-card">
+                <div class="highlight-icon">📚</div>
+                <h3>500+ интерактивных книг</h3>
+                <p>Сказки, приключения, научпоп — новые книги каждую неделю. Озвучка, анимации и мини-игры внутри.</p>
+            </div>
+            <div class="highlight-card">
+                <div class="highlight-icon">👤</div>
+                <h3>Личный кабинет</h3>
+                <p>Профиль ребёнка с аватаром, прогресс чтения, коллекция наград и список любимых книг.</p>
+            </div>
+            <div class="highlight-card">
+                <div class="highlight-icon">👨‍👩‍👧‍👦</div>
+                <h3>Семейный доступ</h3>
+                <p>До 4 профилей детей на одном аккаунте. Каждый ребёнок видит контент, подобранный под свой возраст.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Библиотека -->
+    <div class="section-alt">
+        <section id="library" class="section">
+            <h2 class="section-title">Библиотека книг</h2>
+            <p class="section-subtitle">Каждая книга — это маленькое приключение. Выбирай и погружайся!</p>
+            <div class="library-preview">
+                <div class="book-card">
+                    <div class="book-cover">🐉</div>
+                    <div class="book-info">
+                        <h4>Дракон и печенье</h4>
+                        <span>Сказка</span><span class="book-age">4+</span>
+                    </div>
+                </div>
+                <div class="book-card">
+                    <div class="book-cover">🚀</div>
+                    <div class="book-info">
+                        <h4>Космические друзья</h4>
+                        <span>Приключения</span><span class="book-age">6+</span>
+                    </div>
+                </div>
+                <div class="book-card">
+                    <div class="book-cover">🌊</div>
+                    <div class="book-info">
+                        <h4>Тайны океана</h4>
+                        <span>Научпоп</span><span class="book-age">8+</span>
+                    </div>
+                </div>
+                <div class="book-card">
+                    <div class="book-cover">🦊</div>
+                    <div class="book-info">
+                        <h4>Лисёнок и звёзды</h4>
+                        <span>Сказка</span><span class="book-age">4+</span>
+                    </div>
+                </div>
+                <div class="book-card">
+                    <div class="book-cover">🏰</div>
+                    <div class="book-info">
+                        <h4>Замок в облаках</h4>
+                        <span>Фэнтези</span><span class="book-age">7+</span>
+                    </div>
+                </div>
+                <div class="book-card">
+                    <div class="book-cover">🔬</div>
+                    <div class="book-info">
+                        <h4>Юный учёный</h4>
+                        <span>Научпоп</span><span class="book-age">9+</span>
+                    </div>
+                </div>
+                <div class="book-card">
+                    <div class="book-cover">🐱</div>
+                    <div class="book-info">
+                        <h4>Кот-путешественник</h4>
+                        <span>Приключения</span><span class="book-age">5+</span>
+                    </div>
+                </div>
+                <div class="book-card">
+                    <div class="book-cover">🌺</div>
+                    <div class="book-info">
+                        <h4>Сад чудес</h4>
+                        <span>Сказка</span><span class="book-age">4+</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Личный кабинет -->
+    <section id="cabinet" class="section">
+        <h2 class="section-title">Личный кабинет</h2>
+        <p class="section-subtitle">У каждого ребёнка — свой мир внутри ChitKit.</p>
+        <div class="cabinet-grid">
+            <div class="cabinet-visual">
+                <div class="cabinet-mockup">
+                    <div class="mockup-header">
+                        <div class="mockup-avatar">🦁</div>
+                        <div>
+                            <div class="mockup-name">Алиса</div>
+                            <div class="mockup-level">Уровень 7 — Книжный волшебник</div>
+                        </div>
+                    </div>
+                    <div class="mockup-stats">
+                        <div class="mockup-stat">
+                            <div class="mockup-stat-num">24</div>
+                            <div class="mockup-stat-label">Книги</div>
+                        </div>
+                        <div class="mockup-stat">
+                            <div class="mockup-stat-num">12</div>
+                            <div class="mockup-stat-label">Награды</div>
+                        </div>
+                        <div class="mockup-stat">
+                            <div class="mockup-stat-num">5ч</div>
+                            <div class="mockup-stat-label">На неделе</div>
+                        </div>
+                    </div>
+                    <div class="mockup-progress"></div>
+                    <div class="mockup-progress">
+                        <div class="mockup-progress-bar"></div>
+                    </div>
+                    <div class="mockup-progress-label">68% до следующего уровня</div>
+                </div>
+            </div>
+            <div class="cabinet-text">
+                <h3>Профиль ребёнка</h3>
+                <p>Каждый ребёнок получает собственный профиль с аватаром, уровнями и достижениями. Чем больше читает — тем выше уровень!</p>
+                <h3>Родительская панель</h3>
+                <p>Родители видят полную статистику: сколько читает ребёнок, какие книги выбирает, как растут навыки.</p>
+                <ul class="cabinet-features">
+                    <li>Индивидуальный подбор книг по возрасту</li>
+                    <li>Статистика чтения и прогресс</li>
+                    <li>Коллекция наград и достижений</li>
+                    <li>Список избранных книг</li>
+                    <li>Настройка таймеров чтения</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Возможности платформы -->
+    <div class="section-alt">
+        <section id="features" class="section">
+            <h2 class="section-title">Возможности платформы</h2>
+            <p class="section-subtitle">Каждая функция создана, чтобы сделать чтение увлекательным и полезным.</p>
+            <div class="features-list">
+                <div class="feature-row">
+                    <div class="feature-row-icon">🎨</div>
+                    <div>
+                        <h3>Интерактивные страницы</h3>
+                        <p>Касайся картинок — они оживают! Каждая страница книги содержит анимации и звуковые эффекты.</p>
+                    </div>
+                </div>
+                <div class="feature-row">
+                    <div class="feature-row-icon">🎧</div>
+                    <div>
+                        <h3>Профессиональная озвучка</h3>
+                        <p>Все книги озвучены актёрами. Ребёнок может читать сам или слушать, следя за подсвеченным текстом.</p>
+                    </div>
+                </div>
+                <div class="feature-row">
+                    <div class="feature-row-icon">🏅</div>
+                    <div>
+                        <h3>Система достижений</h3>
+                        <p>За каждую прочитанную книгу — награда. Значки, медали, уровни — мотивация читать каждый день.</p>
+                    </div>
+                </div>
+                <div class="feature-row">
+                    <div class="feature-row-icon">🧩</div>
+                    <div>
+                        <h3>Мини-игры после книг</h3>
+                        <p>Викторины и задания по прочитанному закрепляют понимание и делают чтение ещё интереснее.</p>
+                    </div>
+                </div>
+                <div class="feature-row">
+                    <div class="feature-row-icon">📴</div>
+                    <div>
+                        <h3>Офлайн-режим</h3>
+                        <p>Скачивайте книги для чтения без интернета — в дороге, на даче, в самолёте.</p>
+                    </div>
+                </div>
+                <div class="feature-row">
+                    <div class="feature-row-icon">🌙</div>
+                    <div>
+                        <h3>Ночной режим</h3>
+                        <p>Мягкие цвета, тихая озвучка и автоматический таймер засыпания для чтения перед сном.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Безопасность -->
+    <section class="section">
+        <h2 class="section-title">Безопасность прежде всего</h2>
+        <p class="section-subtitle">ChitKit Kids создан с заботой о безопасности вашего ребёнка.</p>
+        <div class="safety-grid">
+            <div class="safety-card">
+                <div class="safety-icon">🔒</div>
+                <h3>Без рекламы</h3>
+                <p>Никакой сторонней рекламы и баннеров внутри приложения.</p>
+            </div>
+            <div class="safety-card">
+                <div class="safety-icon">👨‍👩‍👧</div>
+                <h3>Родительский контроль</h3>
+                <p>Все покупки и настройки только с подтверждением родителя.</p>
+            </div>
+            <div class="safety-card">
+                <div class="safety-icon">🛡️</div>
+                <h3>Модерация контента</h3>
+                <p>Каждая книга проверена детскими психологами.</p>
+            </div>
+            <div class="safety-card">
+                <div class="safety-icon">📋</div>
+                <h3>Закон 152-ФЗ</h3>
+                <p>Данные хранятся в РФ, обработка по закону о персональных данных.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Тарифы -->
+    <div class="section-alt">
+        <section id="pricing" class="section">
+            <h2 class="section-title">Тарифы</h2>
+            <p class="section-subtitle">Начните бесплатно — обновитесь, когда будете готовы.</p>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Бесплатный</h3>
+                    <div class="pricing-price">0 ₽</div>
+                    <div class="pricing-period">навсегда</div>
+                    <ul class="pricing-features">
+                        <li>✅ 50 книг из библиотеки</li>
+                        <li>✅ 1 профиль ребёнка</li>
+                        <li>✅ Базовая статистика</li>
+                        <li>✅ Система достижений</li>
+                        <li>❌ Офлайн-режим</li>
+                        <li>❌ Озвучка</li>
+                    </ul>
+                    <a href="#" class="btn btn-purple">Начать бесплатно</a>
+                </div>
+                <div class="pricing-card featured">
+                    <div class="pricing-badge">Популярный</div>
+                    <h3>Семейный</h3>
+                    <div class="pricing-price">299 ₽</div>
+                    <div class="pricing-period">в месяц</div>
+                    <ul class="pricing-features">
+                        <li>✅ Все 500+ книг</li>
+                        <li>✅ До 4 профилей</li>
+                        <li>✅ Полная статистика</li>
+                        <li>✅ Все достижения</li>
+                        <li>✅ Офлайн-режим</li>
+                        <li>✅ Профессиональная озвучка</li>
+                    </ul>
+                    <a href="#" class="btn btn-pink">Подписаться</a>
+                </div>
+                <div class="pricing-card">
+                    <h3>Годовой</h3>
+                    <div class="pricing-price">2 490 ₽</div>
+                    <div class="pricing-period">в год (−30%)</div>
+                    <ul class="pricing-features">
+                        <li>✅ Всё из «Семейного»</li>
+                        <li>✅ Приоритетная поддержка</li>
+                        <li>✅ Ранний доступ к новинкам</li>
+                        <li>✅ Эксклюзивные награды</li>
+                        <li>✅ Скидка 30%</li>
+                        <li>✅ Заморозка подписки</li>
+                    </ul>
+                    <a href="#" class="btn btn-purple">Выбрать годовой</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta">
+        <h2>Открой мир книг для ребёнка! 📖</h2>
+        <p>50 бесплатных книг уже ждут. Создайте аккаунт за минуту и начните читать прямо сейчас.</p>
+        <a href="#" class="btn btn-primary">Создать аккаунт</a>
+    </div>
+
+    <!-- Поддержка -->
+    <section id="support" class="section">
+        <h2 class="section-title">Поддержка</h2>
+        <p class="section-subtitle">Мы рядом и всегда готовы помочь.</p>
+        <div class="support-grid">
+            <div class="support-card">
+                <div class="support-card-icon">🛟</div>
+                <h3>Техподдержка</h3>
+                <p>Проблемы с доступом, входом или работой приложения? Мы поможем разобраться.</p>
+                <a href="mailto:support@chitkit.kids">support@chitkit.kids</a>
+            </div>
+            <div class="support-card">
+                <div class="support-card-icon">💛</div>
+                <h3>Советы и обратная связь</h3>
+                <p>Советы по чтению, рекомендации книг, отзывы и предложения от родителей и детей.</p>
+                <a href="mailto:care@chitkit.kids">care@chitkit.kids</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <div class="section-alt">
+        <section id="faq" class="section">
+            <h2 class="section-title">Частые вопросы</h2>
+            <p class="section-subtitle">Ответы на вопросы о платформе ChitKit Kids.</p>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                        Как создать аккаунт?
+                    </button>
+                    <div class="faq-answer">Нажмите «Создать аккаунт», укажите email и возраст ребёнка. Регистрация занимает меньше минуты. После этого вы сразу получите доступ к 50 бесплатным книгам.</div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                        Можно ли добавить несколько детей?
+                    </button>
+                    <div class="faq-answer">Да! На бесплатном тарифе доступен 1 профиль ребёнка. На тарифах «Семейный» и «Годовой» — до 4 профилей с индивидуальным подбором книг под возраст каждого ребёнка.</div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                        Как отменить подписку?
+                    </button>
+                    <div class="faq-answer">Отменить подписку можно в настройках профиля или через App Store / Google Play. Отмена вступает в силу по окончании оплаченного периода. Доступ к контенту сохраняется до конца периода.</div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                        Работает ли ChitKit без интернета?
+                    </button>
+                    <div class="faq-answer">На платных тарифах вы можете скачать книги для чтения офлайн. На бесплатном тарифе офлайн-режим недоступен.</div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                        Безопасно ли приложение для детей?
+                    </button>
+                    <div class="faq-answer">Абсолютно. В ChitKit Kids нет рекламы, внешних ссылок и встроенных покупок без подтверждения родителя. Весь контент проходит модерацию детских психологов. Данные хранятся в России в соответствии с 152-ФЗ.</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Футер -->
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <div class="footer-brand">ChitKit.kids</div>
+                <p class="footer-desc">Продуктовая платформа для детского чтения. Личные кабинеты, интерактивные книги, система достижений и родительский контроль.</p>
+            </div>
+            <div>
+                <h4>Платформа</h4>
+                <ul class="footer-links">
+                    <li><a href="#library">Библиотека</a></li>
+                    <li><a href="#cabinet">Личный кабинет</a></li>
+                    <li><a href="#features">Возможности</a></li>
+                    <li><a href="#pricing">Тарифы</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Поддержка</h4>
+                <ul class="footer-links">
+                    <li><a href="mailto:support@chitkit.kids">Техподдержка</a></li>
+                    <li><a href="mailto:care@chitkit.kids">Обратная связь</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Проект ChitKit</h4>
+                <ul class="footer-links">
+                    <li><a href="https://chitkit.ru/">chitkit.ru</a></li>
+                    <li><a href="https://chitkit.ru/privacy.html">Конфиденциальность</a></li>
+                    <li><a href="https://chitkit.ru/terms.html">Соглашение</a></li>
+                    <li><a href="https://chitkit.ru/cookies.html">Cookies</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2025–2026 ChitKit. Все права защищены.</span>
+            <div class="footer-legal">
+                <a href="https://chitkit.ru/privacy.html">Конфиденциальность</a>
+                <a href="https://chitkit.ru/terms.html">Условия</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
