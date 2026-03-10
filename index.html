@@ -3,19 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Название моего сайта</title>
+    <title>ChitKit — Интерактивная детская читалка</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Базовые настройки страницы */
+        body {
+            margin: 0;
+            font-family: 'Nunito', sans-serif;
+            background-color: #fdfbf7; /* Мягкий кремовый фон */
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Шапка сайта */
+        header {
+            background-color: #ff9f43; /* Яркий оранжевый */
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+        }
+
+        /* Основная часть */
+        main {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        /* Карточка с контентом */
+        .hero-card {
+            background: white;
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            max-width: 600px;
+            border: 3px dashed #1dd1a1; /* Мятная пунктирная рамка для игривости */
+        }
+
+        h2 {
+            color: #ff9f43;
+            font-size: 2rem;
+            margin-top: 0;
+        }
+
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        /* Кнопка-заглушка */
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 15px 30px;
+            background-color: #1dd1a1; /* Мятный цвет кнопки */
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .btn:hover {
+            background-color: #10ac84;
+            transform: scale(1.05);
+        }
+
+        /* Подвал */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #fff;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Привет! Это мой будущий сайт</h1>
+        <h1>ChitKit</h1>
     </header>
     
     <main>
-        <p>Здесь скоро будет контент проекта ChitKit.</p>
-    </main>
-
-    <footer>
-        <p>© 2026 Все права защищены</p>
-    </footer>
-</body>
-</html>
+        <div class="hero-card">
+            <h2>Книги, которые оживают!</h2>
+            <p>
