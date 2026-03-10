@@ -469,6 +469,48 @@
             margin: 0 auto 32px;
         }
 
+        /* ===== ЭКОСИСТЕМА ===== */
+        .ecosystem-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .eco-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 28px 24px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: transform 0.2s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .eco-card:hover { transform: translateY(-4px); }
+
+        .eco-domain {
+            font-size: 1.15rem;
+            font-weight: 900;
+            color: var(--orange);
+            margin-bottom: 8px;
+        }
+
+        .eco-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .eco-card p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin: 0;
+        }
+
         /* ===== КОНТАКТЫ ===== */
         .contact-grid {
             display: grid;
@@ -478,22 +520,40 @@
 
         .contact-info h3 {
             color: var(--orange);
-            font-size: 1.3rem;
-            margin: 0 0 16px;
+            font-size: 1.2rem;
+            margin: 0 0 14px;
+        }
+
+        .contact-group {
+            margin-bottom: 24px;
         }
 
         .contact-item {
             display: flex;
             align-items: flex-start;
             gap: 12px;
-            margin-bottom: 16px;
-            font-size: 1rem;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
             color: var(--text-light);
         }
 
         .contact-item span:first-child {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             flex-shrink: 0;
+        }
+
+        .contact-item a {
+            color: var(--text-light);
+            text-decoration: none;
+        }
+
+        .contact-item a:hover { color: var(--orange); }
+
+        .contact-item small {
+            display: block;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-top: 2px;
         }
 
         .contact-form {
@@ -530,8 +590,8 @@
             max-width: 1100px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 32px;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+            gap: 28px;
             margin-bottom: 32px;
         }
 
@@ -602,6 +662,8 @@
 
             .stats-inner { grid-template-columns: 1fr 1fr; }
 
+            .ecosystem-grid { grid-template-columns: 1fr 1fr; }
+
             .footer-grid { grid-template-columns: 1fr 1fr; }
         }
 
@@ -633,6 +695,8 @@
             .steps { grid-template-columns: 1fr; }
 
             .stats-inner { grid-template-columns: 1fr 1fr; gap: 20px; }
+
+            .ecosystem-grid { grid-template-columns: 1fr 1fr; }
 
             .footer-grid { grid-template-columns: 1fr; }
         }
@@ -829,6 +893,34 @@
         </div>
     </section>
 
+    <!-- Экосистема -->
+    <section id="ecosystem" class="section">
+        <h2 class="section-title">Экосистема ChitKit</h2>
+        <p class="section-subtitle">Наши домены — каждый для своей задачи.</p>
+        <div class="ecosystem-grid">
+            <div class="eco-card">
+                <div class="eco-label">Корпоративный хаб</div>
+                <div class="eco-domain">chitkit.ru</div>
+                <p>Главная страница проекта, информация, юридические документы и SEO.</p>
+            </div>
+            <div class="eco-card">
+                <div class="eco-label">Продуктовая платформа</div>
+                <div class="eco-domain">chitkit.kids</div>
+                <p>Личные кабинеты, доступ к книгам и интерактивный контент для детей.</p>
+            </div>
+            <div class="eco-card">
+                <div class="eco-label">Магазин</div>
+                <div class="eco-domain">chitkit.store</div>
+                <p>Подписки, физические книги, мерч и подарочные сертификаты.</p>
+            </div>
+            <div class="eco-card">
+                <div class="eco-label">Маркетинговое зеркало</div>
+                <div class="eco-domain">читкит.рф</div>
+                <p>Кириллический адрес для рекламы и удобных устных упоминаний.</p>
+            </div>
+        </div>
+    </section>
+
     <!-- CTA -->
     <div class="cta">
         <h2>Готовы начать читать?</h2>
@@ -843,27 +935,52 @@
             <p class="section-subtitle">Свяжитесь с нами — мы всегда рады помочь.</p>
             <div class="contact-grid">
                 <div class="contact-info">
-                    <h3>Как с нами связаться</h3>
-                    <div class="contact-item">
-                        <span>📧</span>
-                        <span>hello@chitkit.ru</span>
+                    <div class="contact-group">
+                        <h3>Общие вопросы и PR</h3>
+                        <div class="contact-item">
+                            <span>📧</span>
+                            <span><a href="mailto:hello@chitkit.ru">hello@chitkit.ru</a><small>Первичные контакты и PR</small></span>
+                        </div>
+                        <div class="contact-item">
+                            <span>📍</span>
+                            <span>Москва, Россия</span>
+                        </div>
                     </div>
-                    <div class="contact-item">
-                        <span>📍</span>
-                        <span>Москва, Россия</span>
+
+                    <div class="contact-group">
+                        <h3>Для бизнеса и партнёров</h3>
+                        <div class="contact-item">
+                            <span>🤝</span>
+                            <span><a href="mailto:partner@chitkit.ru">partner@chitkit.ru</a><small>Авторы, издательства, B2B</small></span>
+                        </div>
+                        <div class="contact-item">
+                            <span>🛒</span>
+                            <span><a href="mailto:sales@chitkit.store">sales@chitkit.store</a><small>Оптовые закупки и акции</small></span>
+                        </div>
                     </div>
-                    <div class="contact-item">
-                        <span>💬</span>
-                        <span>Телеграм: @chitkit_support</span>
+
+                    <div class="contact-group">
+                        <h3>Поддержка пользователей</h3>
+                        <div class="contact-item">
+                            <span>🛟</span>
+                            <span><a href="mailto:support@chitkit.kids">support@chitkit.kids</a><small>Техподдержка и помощь с доступом</small></span>
+                        </div>
+                        <div class="contact-item">
+                            <span>💛</span>
+                            <span><a href="mailto:care@chitkit.kids">care@chitkit.kids</a><small>Советы по чтению, обратная связь</small></span>
+                        </div>
+                        <div class="contact-item">
+                            <span>📦</span>
+                            <span><a href="mailto:orders@chitkit.store">orders@chitkit.store</a><small>Статус доставки, чеки, подтверждения</small></span>
+                        </div>
                     </div>
-                    <h3 style="margin-top: 24px;">Для бизнеса</h3>
-                    <div class="contact-item">
-                        <span>🤝</span>
-                        <span>Партнёрство: partners@chitkit.ru</span>
-                    </div>
-                    <div class="contact-item">
-                        <span>📰</span>
-                        <span>Пресса: press@chitkit.ru</span>
+
+                    <div class="contact-group">
+                        <h3>Юридические вопросы</h3>
+                        <div class="contact-item">
+                            <span>🔒</span>
+                            <span><a href="mailto:privacy@chitkit.ru">privacy@chitkit.ru</a><small>Роскомнадзор и персональные данные</small></span>
+                        </div>
                     </div>
                 </div>
                 <form class="contact-form" onsubmit="return false;">
@@ -898,7 +1015,17 @@
                 <ul class="footer-links">
                     <li><a href="#contact">Контакты</a></li>
                     <li><a href="#faq">Помощь</a></li>
-                    <li><a href="mailto:hello@chitkit.ru">Email</a></li>
+                    <li><a href="mailto:hello@chitkit.ru">hello@chitkit.ru</a></li>
+                    <li><a href="mailto:support@chitkit.kids">support@chitkit.kids</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Экосистема</h4>
+                <ul class="footer-links">
+                    <li><a href="#ecosystem">chitkit.ru</a></li>
+                    <li><a href="#ecosystem">chitkit.kids</a></li>
+                    <li><a href="#ecosystem">chitkit.store</a></li>
+                    <li><a href="#ecosystem">читкит.рф</a></li>
                 </ul>
             </div>
             <div>
