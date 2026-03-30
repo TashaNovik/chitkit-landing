@@ -1,0 +1,11 @@
+title: ChitKit
+url: "https://chitkit.ru"
+baseurl: ""
+
+plugins:
+  - jekyll-redirect-from
+
+exclude:
+  - "Md based соглашения с поддержкой версионности.md"
+  - "Политика конфиденциальности — ChitKit.html"
+  - "Пользовательское соглашение — ChitKit.html"
