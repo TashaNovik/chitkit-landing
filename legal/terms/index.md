@@ -1,3 +1,3 @@
 ---
-redirect_to: /legal/terms/v1.0
+redirect_to: /legal/terms/v1.0.html
 ---
